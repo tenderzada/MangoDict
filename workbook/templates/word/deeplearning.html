@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  首页
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <!-- 单词显示区 -->
+  <div class="row">
+    <div class="col-sm-4">
+        <!-- <div class="card" style="width: 18rem;">
+            <img src="" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">姓名：陈郊</h5>
+              <p class="card-text">简介：五月，小巷微凉</p>
+            </div>
+        </div> -->
+        <!-- 分类 -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">分类专栏</h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">英语六级词汇</li>
+                <li class="list-group-item">英语四级词汇</li>
+                <li class="list-group-item">Python相关词汇</li>
+                <li class="list-group-item">
+                  <a href="{% url 'dict:deeplearning' %} ">深度学习相关词汇</a>
+                </li>
+              </ul>
+              <a href="#" class="card-link">更多</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-8">
+        <!-- main部分 头部导航 -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">单词清单<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    排序方式
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">A开头</a>
+                    <a class="dropdown-item"><a href="{% url 'dict:order' %} ">B开头</a></a>
+                  </div>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="输入内容" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+              </form>
+            </div>
+        </nav>
+        <br>
+        <!-- main部分 列表 -->
+        {% for word in words %}
+        <div class="card">
+          <div class="card-header">
+            <h5>{{ word.spell }}</h5>
+          </div>
+          <div class="card-body">
+            <!-- <p class="card-text"><span class="badge badge-secondary">词性：&nbsp&nbsp{{ word.nature }}</span></p> -->
+            <h6 class="card-title">中文：&nbsp&nbsp{{ word.translation }}</h6>
+            <p class="card-text">例句：&nbsp&nbsp{{ word.example }}</p>
+            <a href="{% url 'dict:word_detail' word.id %} " class="btn btn-primary">更多细节</a>
+          </div>
+        </div>
+        <!-- <ul class="list-unstyled">
+            <li class="media">
+              <div class="media-body">
+                <h5 class="mt-0 mb-1">{{ word.spell }}</h5>
+                <h6><span class="badge badge-primary">词性：{{ word.nature }}</span></h6>
+                <h6><span class="badge badge-info">中文：</span>&nbsp&nbsp{{ word.translation }} </h6>
+                <h6><span class="badge badge-success">例句：</span></h6>
+              </div>
+            </li>
+        </ul> -->
+        {% endfor %}
+
+        <!-- main部分 分页 -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <!-- 如果不是第一页，则显示上翻按钮 -->
+            {% if words.has_previous %}
+            <li class="page-item">
+              <a class="page-link" href="?page=1">Privious</a>
+              <!-- <a href="?page={{ words.previous_page_number }}">{{ words.previous_page_number }}</a> -->
+            </li>
+            {% endif %}
+
+            <!-- 当前页面 -->
+            <li class="page-item">
+              <a class="page-link" href="#">{{ words.number }}</a>
+            </li>
+
+            {% if words.has_next %}
+            <li class="page-item">
+              <a class="page-link" href="?page={{ words.next_page_number }}">Next</a>
+              <!-- <a href="?page={{ words.paginator.num_pages }}">{{ words.paginator.num_pages }}</a> -->
+            </li>
+            {% endif %}
+          </ul>
+        </nav>
+    </div>
+  </div>
+{% endblock content %}

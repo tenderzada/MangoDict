@@ -1,0 +1,52 @@
+<!-- extends表明此页面继承自 base.html 文件 -->
+{% extends "base.html" %}
+{% load staticfiles %}
+
+<!-- 写入 base.html 中定义的 title -->
+{% block title %}
+    单词详情
+{% endblock title %}
+
+<!-- 写入 base.html 中定义的 content -->
+{% block content %}
+
+<!-- 单词详情 -->
+<div class="container">
+    <div class="row">
+        <!-- 单词拼写 -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active" aria-current="page">
+                  <a href="{% url 'dict:word_list' %}">返回首页</a>
+              </li>
+            </ol>
+        </nav>
+        <!-- <div class="row">
+            {% if word.column %}
+                <button type="button" 
+                    class="btn btn-sm
+                        {% if word.column.title == 'deeplearning' %}
+                        btn-primary
+                        {% elif word.column.title == '四级词汇' %}
+                        btn-secondary
+                        {% elif word.column.title == '六级词汇' %}
+                        btn-success
+                        {% elif word.column.title == 'Python相关' %}
+                        btn-danger
+                        {% endif %}
+                    "
+                >
+                {{ word.column.title }}
+                </button>
+        {% endif %}
+        </div> -->
+        <h1 class="col-12 mt-4 mb-4" style="background-color: #45abf3;">{{ word.spell }}</h1>
+        <div class="col-12 alert alert-success">
+            <h5>中文：&nbsp&nbsp{{ word.translation }}</h5>
+            <h5>例句：&nbsp&nbsp{{ word.example }}</h5>
+        </div>
+        
+    </div>
+</div>
+
+{% endblock content %}

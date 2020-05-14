@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  首页
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+      <div class="col-12">
+          <br>
+          <!-- 提交的表单 -->
+          <form method="post" action=".">
+              <!-- Django中需要POST数据的地方都必须有csrf_token -->
+              {% csrf_token %}
+              <!-- spell -->
+              <div class="form-group">
+                  <!-- 标签 -->
+                  <label for="spell">拼写</label>
+                  <!-- 文本框 -->
+                  <input type="text" class="form-control" id="spell" name="spell">
+              </div>
+              <!-- past -->
+              <div class="form-group">
+                <!-- 标签 -->
+                <label for="title">过去式</label>
+                <!-- 文本框 -->
+                <input type="text" class="form-control" id="past" name="past">
+              </div>
+
+              <div class="form-group">
+                <!-- 标签 -->
+                <label for="title">过去分词</label>
+                <!-- 文本框 -->
+                <input type="text" class="form-control" id="pasted" name="pasted">
+              </div>
+
+              <div class="form-group">
+                <!-- 标签 -->
+                <label for="title">现在分词</label>
+                <!-- 文本框 -->
+                <input type="text" class="form-control" id="nowing" name="nowing">
+              </div>
+
+              <div class="form-group">
+                <!-- 标签 -->
+                <label for="title">复数</label>
+                <!-- 文本框 -->
+                <input type="text" class="form-control" id="fushu" name="fushu">
+              </div>
+
+              <div class="form-group">
+                <!-- 标签 -->
+                <label for="title">词性-中文翻译</label>
+                <!-- 文本框 -->
+                <input type="text" class="form-control" id="translation" name="translation">
+              </div>
+              
+              <div class="form-group">
+                  <label for="body">例句</label>
+                  <!-- 文本区域 -->
+                  <textarea type="text" class="form-control" id="example" name="example" rows="12"></textarea>
+              </div>
+              <!-- 提交按钮 -->
+              <button type="submit" class="btn btn-primary">完成</button>
+          </form>
+      </div>
+  </div>
+</div>
+{% endblock content %}

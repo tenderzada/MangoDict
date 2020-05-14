@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+  首页
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <!-- 输入区 -->
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="search" id="userInput" name='userInput'>
+            <div class="input-group-append">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn">提交</button>
+    </form>
+
+    <form action="">
+    <div class="form-group">
+        <label for="exampleFormControlTextarea1">搜索结果</label>
+        <textarea class="form-control"  rows="5">{{ userSearch.example }}</textarea>
+    </div>
+    </form>
+</div>
+{% endblock content %}
